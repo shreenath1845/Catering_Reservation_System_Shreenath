@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    .food-img {
+      height: 250px;
+      object-fit: cover;
+      border-radius: 0.375rem 0.375rem 0 0;
+    }
+    .card {
+      height: 100%;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body style="background: #f8f9fa;">
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'customer_dashboard' %}"><i class="fas fa-utensils"></i> ShreeCatering</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="{% url 'customer_dashboard' %}"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link " href="{% url 'view_menu' %}"><i class="fas fa-list"></i> View Menu</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'view_cart' %}">
+              <i class="fas fa-cart-shopping"></i> My Cart
+              {% if cart_item_count > 0 %}
+                <span class="badge bg-success">{{ cart_item_count }}</span>
+              {% endif %}
+            </a>
+          </li>
+          <li class="nav-item">
+  <a class="nav-link " href="{% url 'my_orders' %}"><i class="fas fa-box"></i> My Orders</a>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link " href="{% url 'make_reservation' %}">
+<i class="fas fa-calendar-check"></i> Reservations
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link " href="{% url 'my_reservations' %}">
+<i class="fas fa-calendar-check"></i> My Reservations
+</a>
+</li>
+
+         <li class="nav-item"><a class="nav-link " href="{% url 'customer_profile' %}"><i class="fas fa-user"></i> Profile</a></li>
+
+          <li class="nav-item">
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-light btn-sm"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="container my-5">
+  <div class="text-center mb-5">
+    <h2 class="text-success"><i class="fas fa-smile"></i> Welcome {{ request.user.username }}!</h2>
+    <p class="text-muted fs-5">Delight your tastebuds with our finest catering options</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <img src="{% static 'images/pizza.jpg' %}" class="card-img-top food-img" alt="Pizza">
+        <div class="card-body text-center">
+          <h5 class="card-title text-primary">Pizzas & Snacks</h5>
+          <a href="{% url 'view_menu' %}" class="btn btn-outline-primary btn-sm">🍕 Explore</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <img src="{% static 'images/indian-thali.jpg' %}" class="card-img-top food-img" alt="Indian Thali">
+        <div class="card-body text-center">
+          <h5 class="card-title text-warning">Indian Specials</h5>
+          <a href="{% url 'view_menu' %}" class="btn btn-outline-warning btn-sm">🍛 Explore</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100">
+        <img src="{% static 'images/drinks.jpg' %}" class="card-img-top food-img" alt="Drinks">
+        <div class="card-body text-center">
+          <h5 class="card-title text-info">Drinks & Beverages</h5>
+          <a href="{% url 'view_menu' %}" class="btn btn-outline-info btn-sm">🥤 Explore</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center text-muted mb-4">
+  <hr class="my-4">
+  <p>Designed by <strong>@Shreenath Naik A</strong> 💻</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
